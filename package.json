@@ -1,12 +1,12 @@
 {
-  "name" : "bird",
-  "version" : "0.0.1",
-
+  "name": "bird",
+  "version": "0.0.1",
   "devDependencies": {
     "gulp-browserify": "~0.4.4",
     "gulp-watch": "~0.5.0",
     "gulp-util": "~2.2.14",
-    "reactify": "~0.7.0"
+    "reactify": "~0.7.0",
+    "gulp": "~3.5.2"
   },
   "dependencies": {
     "envify": "~0.2.0",
