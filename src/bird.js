@@ -1,15 +1,13 @@
 /** @jsx React.DOM */
 
 var React = require("react");
+var Component = require("./other");
 
-window.onload = function ()
+var container = document.getElementById("container");
+console.debug("container : %o", container);
+
+var component = React.renderComponent(Component(), container, function ()
 {
-    var container = document.getElementById("container");
-    console.debug("container : %o", container);
-
-    var component = React.renderComponent(<div className="test"/>, container, function ()
-    {
-        console.debug("Yep.");
-    });
-}
+    console.debug("Yep.");
+});
 
