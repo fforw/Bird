@@ -1,24 +1,43 @@
 var gulp = require('gulp');
 var browserify = require('gulp-browserify');
-var watch = require('gulp-watch');
+
+var mainFile = "src/script/bird-main.js";
 
 var browserifyConfig = {
     transform: ["reactify"],
     debug : !gulp.env.production
 };
 
+var paths = {
+    html: "src/*.html",
+    media: "src/media/**/*",
+    script: "src/script/**/*.js"
+}
+
 // Basic usage
-gulp.task('default', function() {
+
+gulp.task('script', function() {
     // Single entry point to browserify
-    gulp.src('src/bird.js')
+    gulp.src(mainFile)
         .pipe(browserify(browserifyConfig))
-        .pipe(gulp.dest("web"));
+        .pipe(gulp.dest("build"));
 });
 
-gulp.task('watch', function () {
-    gulp.src('src/bird.js')
-        .pipe(watch(function(files) {
-            return files.pipe(browserify(browserifyConfig))
-                .pipe(gulp.dest("web"));
-        }));
+gulp.task('html', function () {
+    gulp.src(paths.html)
+        .pipe(gulp.dest("build"));
 });
+
+gulp.task('media', function () {
+    gulp.src(paths.media)
+        .pipe(gulp.dest("build/media"));
+});
+
+gulp.task('watchdog', function () {
+    gulp.watch(paths.script, ['script']);
+    gulp.watch(paths.media, ['media']);
+    gulp.watch(paths.html, ['html']);
+});
+
+gulp.task("watch", ["script", "html", "media", "watchdog"]);
+gulp.task("default", ["script", "html", "media"]);
